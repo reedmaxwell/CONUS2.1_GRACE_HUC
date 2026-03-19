@@ -1,0 +1,19 @@
+# Raw GRACE NetCDFs / HDF5 (large, publicly downloadable)
+data/*.nc
+data/*.h5
+
+# Old notebook (kept locally for reference)
+grace_pfclm_wy2003.new.ipynb
+
+# Archived drafts
+_old/
+
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
