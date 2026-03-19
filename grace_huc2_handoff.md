@@ -28,7 +28,7 @@ All products provide `lwe_thickness` in cm (liquid water equivalent), anomalies 
 
 ## HUC2 Regions
 
-18 CONUS HUC2 basins (codes 01–18). Boundaries from `~/Projects/WTD_viewer/web_app/huc2.geojson`.
+18 CONUS HUC2 basins (codes 01–18). For the PF-CLM side, the HUC2 mask is obtained via `hf_hydrodata` (`huc_mapping`, `conus2` grid, level 2). For GRACE aggregation, boundaries are from a standard HUC2 GeoJSON.
 
 ```python
 HUC2_NAMES = {
@@ -45,6 +45,7 @@ HUC2_NAMES = {
 
 | Script | Purpose |
 |--------|---------|
+| `build_pfclm_tws.ipynb` | Build PF-CLM TWS from daily PFBs, aggregate to HUC2 (runs on Verde/HPC) |
 | `aggregate_grace_products.py` | Aggregate all 3 GRACE products from raw NC to HUC2 CSVs |
 | `plot_wy2003_comparison.py` | Generate all comparison plots (panels, overlays, CONUS mean, differences) |
 
@@ -81,7 +82,8 @@ xarray netcdf4 matplotlib numpy pandas rasterio shapely h5py
 
 ## Notes
 
-- No geopandas/fiona in `subsettools` env — HUC2 boundaries loaded via `json` + `rasterio.features.geometry_mask`
+- No geopandas/fiona required — HUC2 boundaries loaded via `json` + `rasterio.features.geometry_mask`
 - CSR time is numeric "days since 2002-01-01" (capital `Units` attr, needs manual decoding)
 - GRACE timestamps are mid-month; snapped to first-of-month for alignment with ParFlow
 - GSFC native mascons: 41168 irregular tiles, assigned to HUC2 via point-in-polygon (shapely)
+- PF-CLM TWS notebook (`build_pfclm_tws.ipynb`) requires Verde/OpenOnDemand with `/hydrodata` access
